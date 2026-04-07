@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: dcc-drone-app
+    runtime: java
+    region: singapore
+    plan: free
+    buildCommand: export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64 && chmod +x mvnw && ./mvnw clean package -DskipTests
+    startCommand: java -jar target/dccproject-0.0.1-SNAPSHOT.jar
+    javaVersion: 21
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: azure
+      - key: JAVA_HOME
+        value: /usr/lib/jvm/java-21-openjdk-amd64
+      - key: DB_HOST
+        sync: false
+      - key: DB_NAME
+        sync: false
+      - key: DB_USER
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
